@@ -1,0 +1,58 @@
+html,
+body {
+    margin: 0 !important;
+    padding: 0 !important;
+    overflow: hidden;
+    cursor: url('./images/pointer.png'), auto;
+}
+
+canvas {
+    width: 100%;
+    height: auto;
+    background: #111;
+}
+
+#valentinesButton {
+    display: none;
+    position: fixed;
+    /* Changed to fixed to stay on top */
+    background-color: #ff2d75;
+    z-index: 1000;
+    /* Ensure it's on top of the canvas */
+    border: none;
+    color: #fff;
+    cursor: pointer;
+    padding: 18px 45px;
+    font-size: 22px;
+    font-family: 'Quicksand', sans-serif;
+    font-weight: bold;
+    border-radius: 50px;
+    bottom: 15%;
+    /* Position relative to bottom to be safe */
+    left: 50%;
+    transform: translateX(-50%);
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    box-shadow: 0 10px 30px rgba(255, 45, 117, 0.5);
+}
+
+#valentinesButton:hover {
+    transform: translateX(-50%) scale(1.1);
+    background-color: #ff4d8d;
+    box-shadow: 0 0 40px rgba(255, 45, 117, 0.8);
+}
+
+.animate-pulse {
+    animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+@keyframes pulse {
+
+    0%,
+    100% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: .5;
+    }
+}

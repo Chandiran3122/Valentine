@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta property="og:image"
+    content="https://raw.githubusercontent.com/sojijr/valentine-website/main/public/images/favicon.png">
+  <link rel="icon" href="public/images/favicon.png" type="image/x-icon" />
+  <title>Happy Valentine's Day | For My Bubu</title>
+
+  <!-- Scripts & CSS for Day Content -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Quicksand:wght@300;500;700&family=Great+Vibes&family=Pinyon+Script&display=swap"
+    rel="stylesheet">
+
+  <link rel="stylesheet" href="public/style.css">
+  <link rel="stylesheet" href="day.css">
+
+  <style>
+    html {
+      scroll-behavior: smooth !important;
+    }
+
+    #starfield-container {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 9999;
+      background: #111;
+    }
+
+    #main-content {
+      display: none;
+      opacity: 0;
+      transition: opacity 1s ease-in;
+      position: relative;
+      z-index: 10;
+      min-height: 100vh;
+    }
+
+    #main-content.visible {
+      display: block;
+      opacity: 1;
+    }
+  </style>
+</head>
+
+<body class="text-gray-800">
+  <!-- Music Control -->
+  <audio id="bgMusic" loop autoplay>
+    <!-- Updated to use the same audio as index.html -->
+    <source src="music/WhatsApp Audio 2026-02-14 at 9.32.07 PM.mpeg" type="audio/mpeg">
+  </audio>
+  <div class="music-control" onclick="toggleMusic()">
+    <i id="musicIcon" class="fas fa-music text-pink-500 text-xl"></i>
+  </div>
+  <!-- Starfield Journey (index.html content) -->
+  <div id="starfield-container">
+    <canvas id="starfield"></canvas>
+
+    <button id="valentinesButton">Click Me! ❤</button>
+  </div>
+
+  <!-- Main Content (day.html content) -->
+  <div id="main-content">
+    <!-- Valentine Special Overlay -->
+    <div id="valentineOverlay">
+      <div class="big-heart">❤️</div>
+      <h2 class="elegant text-6xl md:text-8xl text-pink-600 mt-10 text-center animate-pulse px-4">
+        Happy Valentine's Day, Bubu!
+      </h2>
+      <p class="handwritten text-3xl text-gray-700 mt-6">Prepare for a journey of love...</p>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="min-h-screen flex flex-col items-center justify-center text-center px-4 relative overflow-hidden">
+      <div class="z-20">
+        <h1 class="elegant text-6xl md:text-9xl text-pink-600 mb-6 drop-shadow-sm">
+          Happy Valentine’s Day, My Bubu ❤️
+        </h1>
+        <p class="handwritten text-2xl md:text-4xl text-gray-700 mb-16 opacity-90">
+          “This little corner of the internet belongs only to you, my love.”
+        </p>
+        <button id="heroClickBtn" onclick="revealJourney()"
+          class="heart-btn bg-pink-500 text-white font-bold py-5 px-12 rounded-full text-2xl flex items-center gap-4 mx-auto">
+          <i class="fas fa-heart animate-pulse"></i> 💝 Click Me, Bubu
+        </button>
+      </div>
+    </section>
+
+    <!-- Our Journey Section -->
+    <section id="journey" class="py-24 px-4 max-w-4xl mx-auto">
+      <h2 class="elegant text-6xl text-center text-pink-600 mb-20">Our Story – Bubu & Dudu Forever</h2>
+      <div class="relative border-l-4 border-pink-200 ml-4 md:ml-0">
+        <div class="mb-16 ml-10 fade-in">
+          <div
+            class="absolute -left-[14px] bg-pink-500 w-8 h-8 rounded-full border-4 border-white flex items-center justify-center text-white shadow-md">
+            <i class="fas fa-comment-dots text-xs"></i>
+          </div>
+          <div class="glass-card p-8 hover:translate-x-2 transition-transform">
+            <h3 class="font-bold text-2xl text-pink-600 mb-3">🌸 The Day We Started Talking</h3>
+            <p class="text-lg italic leading-relaxed">The moment everything changed. A simple conversation that slowly
+              became my favorite part of every day.</p>
+          </div>
+        </div>
+        <div class="mb-16 ml-10 fade-in">
+          <div
+            class="absolute -left-[14px] bg-pink-400 w-8 h-8 rounded-full border-4 border-white flex items-center justify-center text-white shadow-md">
+            <i class="fas fa-magic text-xs"></i>
+          </div>
+          <div class="glass-card p-8 hover:translate-x-2 transition-transform">
+            <h3 class="font-bold text-2xl text-pink-600 mb-3">💫 That First Unstoppable Smile</h3>
+            <p class="text-lg italic leading-relaxed">That smile… that laugh… that specific moment I knew you were
+              special.</p>
+          </div>
+        </div>
+        <div class="mb-16 ml-10 fade-in">
+          <div
+            class="absolute -left-[14px] bg-pink-300 w-8 h-8 rounded-full border-4 border-white flex items-center justify-center text-white shadow-md">
+            <i class="fas fa-star-and-crescent text-xs"></i>
+          </div>
+          <div class="glass-card p-8 hover:translate-x-2 transition-transform">
+            <h3 class="font-bold text-2xl text-pink-600 mb-3">🌙 Our Late Night Talks</h3>
+            <p class="text-lg italic leading-relaxed">Talking about dreams, fears, and everything in between. Those
+              hours feel like minutes when I'm with you.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 5 Reasons Section -->
+    <section class="py-24 bg-white/30">
+      <h2 class="elegant text-6xl text-center text-pink-600 mb-20">Why Dudu Loves His Bubu</h2>
+      <div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-8 px-6 max-w-7xl mx-auto">
+        <div
+          class="glass-card p-8 flex flex-col items-center text-center hover:bg-white/60 transition duration-500 group">
+          <div class="text-5xl mb-6 group-hover:scale-125 transition">❤️</div>
+          <p class="font-bold text-lg text-pink-700">1. Your Healing Smile</p>
+          <p class="text-sm mt-2">It literally heals my worst days and makes everything okay.</p>
+        </div>
+        <!-- ... other reasons ... -->
+        <div
+          class="glass-card p-8 flex flex-col items-center text-center hover:bg-white/60 transition duration-500 group">
+          <div class="text-5xl mb-6 group-hover:scale-125 transition">💖</div>
+          <p class="font-bold text-lg text-pink-700">2. Silent Understanding</p>
+          <p class="text-sm mt-2">Because you understand my soul even when I don’t speak a word.</p>
+        </div>
+        <div
+          class="glass-card p-8 flex flex-col items-center text-center hover:bg-white/60 transition duration-500 group">
+          <div class="text-5xl mb-6 group-hover:scale-125 transition">🌹</div>
+          <p class="font-bold text-lg text-pink-700">3. Your Inner Beauty</p>
+          <p class="text-sm mt-2">You are strong, kind, and truly beautiful inside and out.</p>
+        </div>
+        <div
+          class="glass-card p-8 flex flex-col items-center text-center hover:bg-white/60 transition duration-500 group">
+          <div class="text-5xl mb-6 group-hover:scale-125 transition">☁️</div>
+          <p class="font-bold text-lg text-pink-700">4. Life Feels Lighter</p>
+          <p class="text-sm mt-2">With you, every burden feels lighter and every joy feels bigger.</p>
+        </div>
+        <div
+          class="glass-card p-8 flex flex-col items-center text-center hover:bg-white/60 transition duration-500 group">
+          <div class="text-5xl mb-6 group-hover:scale-125 transition">🏠</div>
+          <p class="font-bold text-lg text-pink-700">5. You are Home</p>
+          <p class="text-sm mt-2">Because loving you is the most natural thing I've ever done.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Memories Section -->
+    <section class="py-24 px-4 bg-cream/20">
+      <h2 class="elegant text-6xl text-center text-pink-600 mb-8">Our Beautiful Memories</h2>
+
+      <div id="memoryGrid" class="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <!-- Memory items will be here -->
+        <div
+          class="memory-card rounded-[30px] overflow-hidden shadow-2xl border-8 border-white bg-white hover:-translate-y-2 transition-all duration-300">
+          <div class="h-80 relative">
+            <video class="w-full h-full object-cover" autoplay muted loop playsinline>
+              <source src="img/9FF43658-6460-4751-891E-8B9934602834.mp4" type="video/mp4">
+            </video>
+          </div>
+        </div>
+        <div
+          class="memory-card rounded-[30px] overflow-hidden shadow-2xl border-8 border-white bg-white hover:-translate-y-2 transition-all duration-300">
+          <div class="h-80"><img src="img/IMG_0149.JPG" class="w-full h-full object-cover"></div>
+        </div>
+        <div
+          class="memory-card rounded-[30px] overflow-hidden shadow-2xl border-8 border-white bg-white hover:-translate-y-2 transition-all duration-300">
+          <div class="h-80"><img src="img/IMG_3543.JPG" class="w-full h-full object-cover"></div>
+        </div>
+        <div
+          class="memory-card rounded-[30px] overflow-hidden shadow-2xl border-8 border-white bg-white hover:-translate-y-2 transition-all duration-300">
+          <div class="h-80"><img src="img/IMG_7377.jpg" class="w-full h-full object-cover"></div>
+        </div>
+        <div
+          class="memory-card rounded-[30px] overflow-hidden shadow-2xl border-8 border-white bg-white hover:-translate-y-2 transition-all duration-300">
+          <div class="h-80 relative">
+            <video class="w-full h-full object-cover" autoplay muted loop playsinline>
+              <source src="img/32D345EF-5B00-427C-98D7-CA9D38F87A73.mp4" type="video/mp4">
+            </video>
+          </div>
+        </div>
+        <div
+          class="memory-card rounded-[30px] overflow-hidden shadow-2xl border-8 border-white bg-white hover:-translate-y-2 transition-all duration-300">
+          <div class="h-80"><img src="img/IMG_9859.JPG" class="w-full h-full object-cover"></div>
+        </div>
+        <div
+          class="memory-card rounded-[30px] overflow-hidden shadow-2xl border-8 border-white bg-white hover:-translate-y-2 transition-all duration-300">
+          <div class="h-80"><img src="img/IMG_7321.jpg" class="w-full h-full object-cover"></div>
+        </div>
+        <div
+          class="memory-card rounded-[30px] overflow-hidden shadow-2xl border-8 border-white bg-white hover:-translate-y-2 transition-all duration-300">
+          <div class="h-80"><img src="img/IMG_5719.jpg" class="w-full h-full object-cover"></div>
+        </div>
+        <div
+          class="memory-card rounded-[30px] overflow-hidden shadow-2xl border-8 border-white bg-white hover:-translate-y-2 transition-all duration-300">
+          <div class="h-80"><img src="img/IMG_1077.jpg" class="w-full h-full object-cover"></div>
+        </div>
+        <div
+          class="memory-card rounded-[30px] overflow-hidden shadow-2xl border-8 border-white bg-white hover:-translate-y-2 transition-all duration-300">
+          <div class="h-80"><img src="img/IMG_3542.JPG" class="w-full h-full object-cover"></div>
+        </div>
+        <div
+          class="memory-card rounded-[30px] overflow-hidden shadow-2xl border-8 border-white bg-white hover:-translate-y-2 transition-all duration-300">
+          <div class="h-80"><img src="img/IMG_5382.jpg" class="w-full h-full object-cover"></div>
+        </div>
+        <div
+          class="memory-card rounded-[30px] overflow-hidden shadow-2xl border-8 border-white bg-white hover:-translate-y-2 transition-all duration-300">
+          <div class="h-80"><img src="img/IMG_7369.jpg" class="w-full h-full object-cover"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Love Letter Section -->
+    <section class="py-32 px-4 max-w-3xl mx-auto text-center">
+      <h2 class="elegant text-6xl text-pink-600 mb-12">Special Delivery for Bubu</h2>
+      <div class="envelope-wrapper">
+        <div id="loveEnvelope" class="envelope" onclick="openMail(this)">
+          <div class="letter">
+            <div class="letter-content handwritten text-xl text-gray-800 text-left">
+              <h2 class="elegant text-3xl text-pink-600 mb-6">My Dearest Bubu,</h2>
+              <p>Before you, love was just a word I used in sentences.</p>
+              <p>After you, it became my reality, my breath, and my favorite feeling.</p>
+              <p>You are my comfort when I'm tired, my happiness when I'm down, my peace in the chaos, and my favorite
+                chaos too.</p>
+              <p>With you, I get to be everything — cute, serious, playful, emotional. You accept all of me.</p>
+              <p>No matter what happens in life, I want to face every sunrise and every storm with you right by my side.
+              </p>
+              <p class="text-right mt-12 font-bold text-pink-600">Forever your Dubu. ❤️</p>
+            </div>
+          </div>
+          <div class="absolute inset-0 flex items-center justify-center z-[5] pointer-events-none">
+            <div class="bg-white/80 px-4 py-2 rounded-lg shadow-sm border border-pink-100 handwritten text-pink-500">
+              Bubu & Dudu Mail 💌</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Final Surprise Section -->
+    <section id="final-surprise"
+      class="py-32 text-center px-6 bg-pink-50/50 relative overflow-hidden min-h-[600px] flex flex-col justify-center items-center">
+      <div class="max-w-2xl mx-auto relative z-10 w-full" id="surprise-area">
+        <!-- Final stages... (I'll keep them simplified for the merge) -->
+        <div id="stage-0">
+          <h2 class="elegant text-5xl text-pink-600 mb-10">Wait... there's one more thing</h2>
+          <button id="mainSurpriseBtn" onclick="nextStage(1)"
+            class="heart-btn bg-pink-600 text-white font-bold py-7 px-14 rounded-full text-3xl flex items-center gap-4 mx-auto shadow-2xl">💝
+            Click, My Love</button>
+        </div>
+        <div id="stage-1" class="hidden">
+          <h2 class="handwritten text-4xl text-pink-600 mb-6">Calculating my love for you...</h2>
+          <div class="progress-container mx-auto max-w-md">
+            <div id="progressBar"></div>
+          </div>
+          <p id="progressText" class="mt-4 font-bold text-pink-500">0%</p>
+        </div>
+        <!-- Stage 2, 3, 4, 5 hidden here... code will handle them -->
+        <div id="stage-2" class="hidden flex flex-col items-center">
+          <div id="messageDisplay"
+            class="handwritten text-5xl text-pink-600 animate-pulse min-h-[100px] flex items-center"></div>
+        </div>
+
+        <div id="stage-3" class="hidden">
+          <h2 class="elegant text-6xl text-pink-600 mb-10">MotiBubu 🦋...</h2>
+          <p class="handwritten text-3xl text-gray-700 mb-12">Will you continue being my forever Valentine? ❤️</p>
+          <div class="flex flex-col md:flex-row gap-8 justify-center items-center relative h-32 md:h-auto">
+            <button onclick="finalCelebration()"
+              class="bg-green-500 text-white px-12 py-5 rounded-full text-2xl font-bold shadow-xl hover:scale-110 transition-all z-20">YES!
+              😍</button>
+            <button id="noBtn" onmouseover="moveNoBtn()" onclick="moveNoBtn()"
+              class="bg-gray-400 text-white px-12 py-5 rounded-full text-2xl font-bold shadow-xl z-10">No</button>
+          </div>
+        </div>
+
+        <div id="stage-4" class="hidden">
+          <h1
+            class="luckiest-font text-[90px] md:text-[140px] text-[var(--deep-rose)] mb-6 animate-pulse leading-[0.8] tracking-tight py-12">
+            I'm the <br> Luckiest <br> Bubu!</h1>
+          <p class="handwritten text-4xl md:text-5xl text-gray-700 mt-6">I love you more than words can say, Bubu! ❤️✨
+          </p>
+          <div class="text-9xl mt-12 animate-bounce">💍🌹💖</div>
+          <button onclick="nextStage(5)"
+            class="heart-btn bg-pink-600 text-white font-bold py-6 px-12 rounded-full text-2xl mt-16 mx-auto shadow-2xl flex items-center gap-4">✨
+            One Last Promise...</button>
+        </div>
+
+        <div id="stage-5" class="hidden">
+          <div class="relative">
+            <h2 class="elegant text-6xl text-pink-600 mb-12">My Promise To You</h2>
+
+            <div class="envelope-wrapper">
+              <div id="promiseEnvelope" class="envelope" onclick="openMail(this)">
+                <div class="letter">
+                  <div class="letter-content handwritten text-xl text-gray-800 text-left">
+                    <h2 class="elegant text-3xl text-pink-600 mb-6">My Eternal Promise 💍</h2>
+                    <p class="text-2xl leading-relaxed italic">
+                      "I promise to hold your hand through every storm, to cherish your smile every morning, and
+                      to be the Dudu who loves you more with every passing heartbeat."
+                    </p>
+                    <p class="text-2xl leading-relaxed italic mt-4">
+                      "I promise to be your safe place, your biggest cheerleader, and your forever Valentine."
+                    </p>
+                    <p class="text-right mt-12 font-bold text-pink-600 text-2xl">— Your Dudu Forever ❤️</p>
+                  </div>
+                </div>
+                <div class="absolute inset-0 flex items-center justify-center z-[5] pointer-events-none">
+                  <div
+                    class="bg-white/80 px-4 py-2 rounded-lg shadow-sm border border-pink-100 handwritten text-pink-500">
+                    Forever Promise 💌
+                  </div>
+                </div>
+              </div>
+            </div>
+            <p class="handwritten text-gray-500 mt-8 text-xl">Click the envelope to read my promise</p>
+
+            <div class="mt-12 text-6xl animate-pulse">♾️🌸🔒</div>
+            <button onclick="nextStage(0)"
+              class="mt-16 text-pink-500 font-bold underline underline-offset-4 hover:text-pink-700 transition flex items-center gap-2 mx-auto handwritten text-2xl">
+              <i class="fas fa-undo-alt text-lg"></i> Experience the Magic Again
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <footer class="py-12 text-center text-gray-400 handwritten text-2xl">“Made with all my heart by Dudu for Bubu 💖”
+    </footer>
+  </div>
+
+  <!-- Scripts -->
+  <script src="script.js"></script>
+  <script src="day.js"></script>
+
+</body>
+
+</html>
